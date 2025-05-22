@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital System - Home</title>
+</head>
+<body>
+    <h1>Welcome to the Hospital System</h1>
+    {% if current_user.is_authenticated %}
+        <p>Hello, {{ current_user.name }}!</p>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a> |
+        <a href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+</body>
+</html>

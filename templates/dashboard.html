@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+<ul class="list-group">
+  <li class="list-group-item"><a href="{{ url_for('patients') }}">Manage Patients</a></li>
+  <li class="list-group-item"><a href="{{ url_for('doctors') }}">Manage Doctors</a></li>
+  <li class="list-group-item"><a href="{{ url_for('add_patient') }}">Add New Patient</a></li>
+  <li class="list-group-item"><a href="{{ url_for('add_doctor') }}">Add New Doctor</a></li>
+</ul>
+{% endblock %}
+
+
