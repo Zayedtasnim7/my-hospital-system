@@ -1,12 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Dashboard</h1>
-<ul class="list-group">
-  <li class="list-group-item"><a href="{{ url_for('patients') }}">Manage Patients</a></li>
-  <li class="list-group-item"><a href="{{ url_for('doctors') }}">Manage Doctors</a></li>
-  <li class="list-group-item"><a href="{{ url_for('add_patient') }}">Add New Patient</a></li>
-  <li class="list-group-item"><a href="{{ url_for('add_doctor') }}">Add New Doctor</a></li>
-</ul>
+<div class="p-4 rounded-3 bg-light mb-4">
+  <h1 class="mb-1">Welcome, {{ name }} 👋</h1>
+  <p class="text-muted mb-0">Role: {{ role }}</p>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Quick Actions</h5>
+        <div class="d-grid gap-2">
+          <a class="btn btn-primary" href="{{ url_for('patients') }}">Manage Patients ({{ patient_count }})</a>
+          <a class="btn btn-primary" href="{{ url_for('doctors') }}">Manage Doctors ({{ doctor_count }})</a>
+          <a class="btn btn-outline-secondary" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Today at Zayed's Hospital</h5>
+        <p class="text-muted">Everything is running smoothly. Use the quick actions to get started or add new records.</p>
+        <ul class="mb-0">
+          <li>Patients total: <strong>{{ patient_count }}</strong></li>
+          <li>Doctors total: <strong>{{ doctor_count }}</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
-
-

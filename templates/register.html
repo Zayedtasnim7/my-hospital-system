@@ -1,32 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row justify-content-center">
+<h1 class="mb-4">Create your account</h1>
+<form method="post" class="row g-3">
+  <input type="hidden" name="role" value="{{ role }}">
+
   <div class="col-md-4">
-    <h2>Register</h2>
-    <form method="POST">
-      <div class="mb-3">
-        <label>Email</label>
-        <input name="email" type="email" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label>Password</label>
-        <input name="password" type="password" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label>Role</label>
-        <select name="role" class="form-select">
-          <option value="receptionist">Receptionist</option>
-          <option value="doctor">Doctor</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-      <button class="btn btn-success w-100">Register</button>
-    </form>
-    <p class="mt-2 text-center">
-      <a href="{{ url_for('login') }}">Back to Login</a>
-    </p>
+    <label class="form-label">First name</label>
+    <input class="form-control" name="first_name" required>
   </div>
-</div>
+  <div class="col-md-4">
+    <label class="form-label">Middle name</label>
+    <input class="form-control" name="middle_name">
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Last name</label>
+    <input class="form-control" name="last_name" required>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Location / Address</label>
+    <input class="form-control" name="address" placeholder="City, State or full address">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Gender / Identity</label>
+    <select class="form-select" name="gender" id="genderSelect">
+      <option value="Female">Female</option>
+      <option value="Male">Male</option>
+      <option value="Non-binary">Non-binary</option>
+      <option value="Prefer not to say">Prefer not to say</option>
+      <option value="Self-describe">Self-describe</option>
+    </select>
+    <div class="mt-2 d-none" id="genderSelfWrap">
+      <input class="form-control" name="gender_self" placeholder="Describe in your own words">
+      <div class="form-text">Use any words that fit you best 💛</div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">How did you hear about us?</label>
+    <select class="form-select" name="referral_source">
+      <option>Friend or Family</option>
+      <option>Social Media</option>
+      <option>Google/Search</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Username</label>
+    <input class="form-control" name="username" placeholder="For display">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Email</label>
+    <input class="form-control" type="email" name="email" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Password</label>
+    <input class="form-control" type="password" name="password" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Re-enter password</label>
+    <input class="form-control" type="password" name="password2" required>
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-success">Create account</button>
+    <a class="btn btn-link" href="{{ url_for('login') }}">Have an account? Login</a>
+  </div>
+</form>
+
+<script>
+const sel = document.getElementById('genderSelect');
+const wrap = document.getElementById('genderSelfWrap');
+function toggleSelf(){ wrap.classList.toggle('d-none', sel.value !== 'Self-describe'); }
+sel.addEventListener('change', toggleSelf); toggleSelf();
+</script>
 {% endblock %}
-
-
