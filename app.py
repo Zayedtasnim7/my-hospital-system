@@ -44,9 +44,7 @@ class Doctor(db.Model):
     name      = db.Column(db.String(150), nullable=False)
     specialty = db.Column(db.String(150), nullable=False)
 
-# ✅ One-time bootstrap: keep for the FIRST deploy only; remove after site works.
-with app.app_context():
-    db.create_all()
+
 
 # ✅ Health check for Render so it knows your service is alive
 @app.route("/healthz")
