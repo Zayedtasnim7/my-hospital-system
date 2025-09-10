@@ -1,0 +1,28 @@
+html { scroll-behavior: smooth; }
+
+.hero{
+  min-height:100vh;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.45)),
+    url("/static/img/hero.png") center/cover no-repeat fixed;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; text-align:center; padding:4rem 1rem;
+}
+
+/* optional: nice button to scroll down */
+.scroll-cta {
+  margin-top: 2rem; display:inline-block; padding:.65rem 1rem;
+  border-radius:999px; background:#ffffffcc; color:#111;
+  text-decoration:none; font-weight:600;
+}
+.scroll-cta:hover { background:#fff; color:#000; }
+
+/* colorful boxes you wanted */
+.option-card { border:0; border-radius:1rem; padding:1.5rem; color:#fff; text-align:center; height:100%;
+  transition: transform .15s ease, box-shadow .15s ease; }
+.option-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+
+.bg-patients { background: linear-gradient(135deg,#34c9ff,#0078d7); }
+.bg-doctors  { background: linear-gradient(135deg,#6dd5ed,#2193b0); }
+.bg-register { background: linear-gradient(135deg,#a1ffce,#faffd1); color:#0b2e13; }
+.bg-login    { background: linear-gradient(135deg,#f7971e,#ffd200); color:#221a00; }
