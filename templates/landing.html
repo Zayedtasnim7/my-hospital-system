@@ -1,29 +1,68 @@
 {% extends "base.html" %}
+{% block title %}Welcome | Hospital System{% endblock %}
 {% block content %}
-<style>
-  .role-card {
-    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
-    cursor: pointer;
-  }
-  .role-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0.75rem 1.25rem rgba(0,0,0,.1);
-    background-color: #0d6efd;
-    color:#fff;
-  }
-  .hero {min-height: 55vh; display:grid; place-items:center; text-align:center;}
-</style>
 
+<!-- HERO (big background section) -->
 <section class="hero">
-  <div>
-    <h1 class="display-4 fw-bold mb-2">Welcome to Zayed's Hospital</h1>
-    <p class="lead text-muted mb-4">What are you?</p>
+  <div class="container">
+    <h1 class="display-5 fw-bold">Welcome to Aurora Health Center</h1>
+    <p class="lead mt-3">
+      Compassionate care, modern technology, and a team that puts you first.
+    </p>
+    <a href="#portal" class="scroll-cta">Explore the app ↓</a>
+  </div>
+</section>
+
+<!-- FOUR COLORFUL BOXES -->
+<section id="portal" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ url_for('patients') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-patients">
+            <h3>Patients</h3>
+            <p>View & manage patient records.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ url_for('doctors') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-doctors">
+            <h3>Doctors</h3>
+            <p>Browse and manage providers.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ url_for('register') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-register">
+            <h3>Register</h3>
+            <p>Create an account to get started.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="{{ url_for('login') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-login">
+            <h3>Login</h3>
+            <p>Access your dashboard.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONAL: Role picker as a separate section (not a hero) -->
+<section class="roles-section py-5 bg-light">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-4">Who are you?</h2>
     <div class="row g-3 justify-content-center">
       {% for r in ["Patient","Doctor","Nurse","Receptionist"] %}
       <div class="col-10 col-sm-6 col-md-3">
         <a class="text-decoration-none" href="{{ url_for('get_started', role=r) }}">
           <div class="role-card border rounded-3 p-4 text-center">
-            <div class="fs-4 fw-semibold">{{ r }}</div>
+            <div class="fs-5 fw-semibold">{{ r }}</div>
           </div>
         </a>
       </div>
@@ -31,4 +70,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}
