@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 
 # ── Models ──
 class User(db.Model):
-    __tablename__ = "users"  # avoid Postgres reserved word "user"
+    __tablename__ = "users"  # ✅ avoid Postgres reserved word "user"
     id            = db.Column(db.Integer, primary_key=True)
     email         = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
@@ -23,7 +23,7 @@ class User(db.Model):
 
 class Profile(db.Model):
     id       = db.Column(db.Integer, primary_key=True)
-    user_id  = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True, nullable=False)  # updated FK
+    user_id  = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True, nullable=False)  # ✅ updated FK
     first_name = db.Column(db.String(100))
     middle_name= db.Column(db.String(100))
     last_name  = db.Column(db.String(100))
@@ -44,11 +44,11 @@ class Doctor(db.Model):
     name      = db.Column(db.String(150), nullable=False)
     specialty = db.Column(db.String(150), nullable=False)
 
-# One-time bootstrap: keep for first deploy only, then remove these 3 lines.
+# ✅ One-time bootstrap: keep for the FIRST deploy only; remove after site works.
 with app.app_context():
     db.create_all()
 
-# Health check for Render
+# ✅ Health check for Render so it knows your service is alive
 @app.route("/healthz")
 def healthz():
     return "ok", 200
