@@ -1,22 +1,95 @@
 {% extends "base.html" %}
+{% block title %}Welcome | Zayed's Hospital{% endblock %}
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-5">
-    <h1 class="mb-4">Login</h1>
-    <form method="post" action="{{ url_for('login') }}">
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input class="form-control" type="email" name="email" required>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1 class="display-5 fw-bold" data-aos="fade-up">Welcome to Zayed’s Hospital</h1>
+    <p class="lead mt-3" data-aos="fade-up" data-aos-delay="120">
+      Trusted care, modern tools, and a team that puts people first.
+      Manage patients, coordinate doctors, and keep records organized—all in one place.
+    </p>
+    <a href="#about" class="scroll-cta" data-aos="zoom-in" data-aos-delay="220">Take a quick tour ↓</a>
+  </div>
+</section>
+
+<!-- ABOUT (animated on scroll) -->
+<section id="about" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <h2 class="h3 fw-bold mb-3" data-aos="fade-right">About Zayed’s Hospital</h2>
+        <p data-aos="fade-right" data-aos-delay="100">
+          Founded to serve our community with dignity and excellence, Zayed’s Hospital combines compassionate bedside care
+          with reliable technology. Our clinicians and support teams work together so patients spend less time waiting and
+          more time healing.
+        </p>
+        <p class="mb-0" data-aos="fade-right" data-aos-delay="180">
+          This portal streamlines everyday tasks—secure sign-in, patient records, and provider coordination—so we can focus
+          on what matters most: delivering safe, high-quality care to every person who walks through our doors.
+        </p>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input class="form-control" type="password" name="password" required>
-      </div>
-      <button class="btn btn-primary w-100">Login</button>
-    </form>
-    <div class="mt-3">
-      <a href="{{ url_for('register') }}">Create an account</a>
     </div>
   </div>
-</div>
+</section>
+
+<!-- FOUR COLORFUL BOXES (each animates in) -->
+<section id="portal" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up">
+        <a href="{{ url_for('patients') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-patients">
+            <h3>Patients</h3>
+            <p>View & manage patient records.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+        <a href="{{ url_for('doctors') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-doctors">
+            <h3>Doctors</h3>
+            <p>Browse and manage providers.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+        <a href="{{ url_for('register') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-register">
+            <h3>Register</h3>
+            <p>Create an account to get started.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+        <a href="{{ url_for('login') }}" class="text-decoration-none d-block h-100">
+          <div class="option-card bg-login">
+            <h3>Login</h3>
+            <p>Access your dashboard.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONAL: Role picker with subtle animations -->
+<section class="roles-section py-5 bg-light">
+  <div class="container">
+    <h2 class="h4 fw-bold mb-4" data-aos="zoom-in">Who are you?</h2>
+    <div class="row g-3 justify-content-center">
+      {% for r in ["Patient","Doctor","Nurse","Receptionist"] %}
+      <div class="col-10 col-sm-6 col-md-3" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 80 }}">
+        <a class="text-decoration-none" href="{{ url_for('get_started', role=r) }}">
+          <div class="role-card border rounded-3 p-4 text-center">
+            <div class="fs-5 fw-semibold">{{ r }}</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 {% endblock %}
