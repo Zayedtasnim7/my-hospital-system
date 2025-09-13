@@ -1,11 +1,12 @@
-/* static/css/site.css */
+/* Smooth anchor scrolling */
 html { scroll-behavior: smooth; }
 
-/* Full-screen hero with your background image + a soft dark overlay */
+/* Full-screen hero with your image + gentle overlay */
 .hero {
   min-height: 100vh;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.45)),
+    radial-gradient(1200px 600px at 80% 10%, rgba(0,140,140,.18), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.30), rgba(0,0,0,.45)),
     url("/static/img/hero.png") center/cover no-repeat fixed; /* change to .jpg if your file is hero.jpg */
   display: flex;
   align-items: center;
@@ -13,22 +14,44 @@ html { scroll-behavior: smooth; }
   color: #fff;
   text-align: center;
   padding: 4rem 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Pretty “scroll down” button */
+/* Subtle floating sparkles (performance-friendly) */
+.hero::after {
+  content: "";
+  position: absolute; inset: -20% -20% auto -20%;
+  height: 60vmax;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0 20%, transparent 22% 100%),
+              radial-gradient(circle at 70% 60%, rgba(255,255,255,.05) 0 18%, transparent 20% 100%);
+  animation: floaty 18s linear infinite;
+  pointer-events: none;
+}
+@keyframes floaty { to { transform: translate3d(6%, -4%, 0) rotate(8deg); } }
+
+/* Headline & lead constraints */
+.hero h1 { letter-spacing: .2px; }
+.hero p  { max-width: 760px; margin: .75rem auto 0; }
+
+/* CTA chip */
 .scroll-cta {
   margin-top: 2rem;
-  display:inline-block;
-  padding:.65rem 1rem;
-  border-radius:999px;
-  background:#ffffffcc;
-  color:#111;
-  text-decoration:none;
-  font-weight:600;
+  display: inline-block;
+  padding: .65rem 1rem;
+  border-radius: 999px;
+  background: #ffffffcc;
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
 }
-.scroll-cta:hover { background:#fff; color:#000; }
+.scroll-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); background:#fff; color:#000; }
 
-/* Four colorful option cards */
+/* Section spacing */
+section { scroll-margin-top: 72px; }
+
+/* Four colorful option cards — medical teal palette */
 .option-card {
   border: 0;
   border-radius: 1rem;
@@ -36,23 +59,31 @@ html { scroll-behavior: smooth; }
   color: #fff;
   text-align: center;
   height: 100%;
-  transition: transform .15s ease, box-shadow .15s ease;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  will-change: transform;
 }
-.option-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
-.bg-patients { background: linear-gradient(135deg,#34c9ff,#0078d7); }
-.bg-doctors  { background: linear-gradient(135deg,#6dd5ed,#2193b0); }
-.bg-register { background: linear-gradient(135deg,#a1ffce,#faffd1); color:#0b2e13; }
-.bg-login    { background: linear-gradient(135deg,#f7971e,#ffd200); color:#221a00; }
+.option-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,.18); filter: saturate(1.05); }
 
-/* Role cards (your second section) */
+.bg-patients { background: linear-gradient(135deg,#16c1b7,#0e7c86); }
+.bg-doctors  { background: linear-gradient(135deg,#29c3ff,#1477c9); }
+.bg-register { background: linear-gradient(135deg,#c8ffea,#7be7c4); color:#0b2e13; }
+.bg-login    { background: linear-gradient(135deg,#ffd36e,#ff8f1f); color:#2a1a00; }
+
+/* “Who are you?” role cards */
 .role-card {
   transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
   cursor: pointer;
+  background: #fff;
 }
 .role-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0.75rem 1.25rem rgba(0,0,0,.1);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.12);
   background-color: #0d6efd;
-  color:#fff;
+  color: #fff;
 }
-.roles-section { text-align:center; }
+.roles-section { text-align: center; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero::after, .option-card:hover, .scroll-cta:hover { animation: none; transform: none; box-shadow: none; }
+}
